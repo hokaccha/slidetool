@@ -51,18 +51,18 @@ body {
     margin: 0.5em 0;
 }
 
-.page ol {
-    padding-left: 100px;
-}
-
 .page ul {
     list-style: none;
 }
 
 .page ul li {
-    padding-left: 40px;
+    padding-left: 1.3em;
     background: url('../img/arrow.png') no-repeat 0 0.43em;
     background-size: 0.75em 0.75em;
+}
+
+.page ol {
+    padding-left: 2.5em;
 }
 
 .top {
