@@ -1,47 +1,52 @@
 $(function() {
 
-var pages = $('.page');
-pages.each(function(i) {
-	var page_number = i + 1;
-	$(this).attr('id', 'page' + page_number);
-});
+var pages = $('.page'),
+	$d    = $(document),
+	$w    = $(window);
 
 function get_page() {
 	return parseInt(location.hash.replace(/^#page/, '')) || 1;
 }
 
-function set_page(page) {
-	page = page || get_page();
+function set_page() {
+	var page = get_page();
 	pages.not(':hidden').hide();
 	pages.eq(page - 1).fadeIn();
 }
 
 function next() {
 	var page = get_page();
-	if (pages.size() <= page) {
-		return;
+	if (pages.size() > page) {
+		page++;
+		location.hash = 'page' + page;
 	}
-	page++;
-	location.hash = 'page' + page;
 }
 
 function prev() {
 	var page = get_page();
-	if (page <= 1) {
-		return;
+	if (page > 1) {
+		page--;
+		location.hash = 'page' + page;
 	}
-	page--;
-	location.hash = 'page' + page;
 }
 
-$(window).bind('hashchange', function() {
-	set_page();
+function height_adjust() {
+	$('body').height( $w.height() );
+}
+
+// set id attr to page
+pages.each(function(i) {
+	var page_number = i + 1;
+	$(this).attr('id', 'page' + page_number);
 });
 
-$(document).click(next);
+// attach event
+$w.bind('hashchange', set_page)
+	.bind('resize', height_adjust);
 
-$(document).keydown(function(e) {
-	switch (e.keyCode) {
+$d.bind('click', next)
+	.bind('keydown', function(e) {
+		switch (e.keyCode) {
 		case 78: // n
 		case 74: // j
 		case 39: // ->
@@ -52,21 +57,13 @@ $(document).keydown(function(e) {
 		case 37: // <-
 			prev();
 			break;
-	}
-});
+		}
+	});
 
-// link open blank window
 $('a').click(function(e) {
 	e.preventDefault();
 	window.open(this.href, '_blank');
 });
-
-// height adjust
-function height_adjust() {
-	$('body').height( $(window).height() );
-}
-
-$(window).resize( height_adjust );
 
 // initialize
 set_page();
