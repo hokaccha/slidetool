@@ -24,13 +24,8 @@ body {
 }
 
 .page strong {
+    font-weight: normal;
     color: #f5394a;
-}
-
-.page h2 {
-    border-bottom: 2px solid #df871e;
-    padding: 0.6em 0.3em 0.2em;
-    margin: 0 0 0.3em 0;
 }
 
 .page p {
@@ -40,6 +35,7 @@ body {
 
 .page pre {
     font-size: 1.3em;
+    line-height: 1.4;
     color: #000;
     margin: 1em;
     padding: 0.5em;
@@ -80,6 +76,12 @@ body {
     font-size: 1.2em;
 }
 
+.plain h2 {
+    border-bottom: 2px solid #df871e;
+    padding: 0.6em 0.3em 0.2em;
+    margin: 0 0 0.3em 0;
+}
+
 .spread {
     font-size: 2.5em;
     display: table;
@@ -91,4 +93,8 @@ body {
     display: table-cell;
     text-align: center;
     vertical-align: middle;
+}
+
+.spread h2 {
+    font-size: 1.3em;
 }
